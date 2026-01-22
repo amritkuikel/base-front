@@ -24,13 +24,13 @@ export const env = createEnv({
 	 * `process.env` or `import.meta.env`.
 	 */
 	runtimeEnv: {
-    SESSION_SECRET: process.env.SESSION_SECRET,
-    SERVER_URL: process.env.SERVER_URL,
+		SESSION_SECRET: process.env.SESSION_SECRET,
+		SERVER_URL: process.env.SERVER_URL,
 
-    VITE_APP_TITLE: import.meta.env.VITE_APP_TITLE,
-    VITE_BASE_URL: import.meta.env.VITE_BASE_URL,
-    VITE_APP_ENV: import.meta.env.VITE_APP_ENV,
-  },
+		VITE_APP_TITLE: import.meta.env.VITE_APP_TITLE,
+		VITE_BASE_URL: import.meta.env.VITE_BASE_URL,
+		VITE_APP_ENV: import.meta.env.VITE_APP_ENV,
+	},
 
 	/**
 	 * By default, this library will feed the environment variables directly to

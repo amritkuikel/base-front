@@ -10,5 +10,5 @@ function App() {
 		<Link to="/intent-test">
 			<Button>Intent Test</Button>
 		</Link>
-	)
+	);
 }

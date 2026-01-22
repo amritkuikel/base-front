@@ -71,7 +71,9 @@ export const getCurrentUserFn = createServerFn({ method: "GET" }).handler(
 	},
 );
 
-export const getTokenFn = createServerFn({ method: "GET" }).handler(async () => {
-	const session = await useAppSession();
-	return session.data.token;
-});
+export const getTokenFn = createServerFn({ method: "GET" }).handler(
+	async () => {
+		const session = await useAppSession();
+		return session.data.token;
+	},
+);

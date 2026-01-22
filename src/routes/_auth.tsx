@@ -1,4 +1,3 @@
-import { getCurrentUserFn } from "@/lib/auth";
 import {
 	createFileRoute,
 	Navigate,
@@ -6,6 +5,7 @@ import {
 	redirect,
 } from "@tanstack/react-router";
 import { z } from "zod";
+import { getCurrentUserFn } from "@/lib/auth";
 
 const authSearchSchema = z.object({
 	redirect: z.string().optional(),
