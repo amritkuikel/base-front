@@ -1,13 +1,14 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import ParaglideLocaleSwitcher from "@/components/shared/locale-switcher";
+import { ModeToggle } from "@/components/shared/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { env } from "@/env";
 import { postsQueryOptions } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { getLocale } from "@/paraglide/runtime";
 
-export const Route = createFileRoute("/intent-test")({
+export const Route = createFileRoute("/_app/intent-test")({
 	loader: async ({ context }) => {
 		await context.queryClient.ensureQueryData(postsQueryOptions());
 	},
@@ -19,6 +20,7 @@ function RouteComponent() {
 	const currentLocale = getLocale();
 	return (
 		<div className="flex flex-col gap-2">
+			<ModeToggle />
 			<div>{m.example_message({ username: "John" })}</div>
 			<div>{m.current_locale({ locale: currentLocale })}</div>
 			<ParaglideLocaleSwitcher />
@@ -33,5 +35,5 @@ function RouteComponent() {
 				</div>
 			))}
 		</div>
-	);
+	)
 }

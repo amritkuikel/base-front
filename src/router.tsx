@@ -8,10 +8,11 @@ import { routeTree } from "./routeTree.gen";
 // Create a new router instance
 export const getRouter = () => {
 	const queryClient = new QueryClient();
-
 	const router = createRouter({
 		routeTree,
-		context: { queryClient },
+		context: {
+			queryClient,
+		},
 		rewrite: {
 			input: ({ url }) => deLocalizeUrl(url),
 			output: ({ url }) => localizeUrl(url),

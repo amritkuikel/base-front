@@ -1,8 +1,9 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: <to be fixed later> */
+/** biome-ignore-all lint/correctness/useHookAtTopLevel: <to be fixed later> */
 import { Mutex } from "async-mutex";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import axios, { AxiosError } from "axios";
-import { getJwt } from "@/providers/use-auth";
+import { getTokenFn } from "./auth";
 
 export const baseURL = `${import.meta.env.VITE_BASE_URL}/api/v1`;
 
@@ -28,7 +29,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	async (config) => {
 		await mutex.waitForUnlock();
-		const access_token = getJwt();
+		const access_token = await getTokenFn();
 		if (access_token && !config.headers.get("no-auth")) {
 			config.headers.Authorization = `Bearer ${access_token}`;
 		}
@@ -66,7 +67,8 @@ axiosInstance.interceptors.response.use(
 				}
 			} else {
 				await mutex.waitForUnlock();
-				originalRequest.headers.Authorization = `Bearer ${getJwt()}`;
+				const access_token = await getTokenFn();
+				originalRequest.headers.Authorization = `Bearer ${access_token}`;
 				return axiosInstance(originalRequest);
 			}
 		}

@@ -8,40 +8,42 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { getLocale } from "@/paraglide/runtime";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { AuthProvider, type useAuth } from "@/providers/use-auth";
 import appCss from "../styles.css?url";
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
-	{
-		beforeLoad: async () => {
-			if (typeof document !== "undefined") {
-				document.documentElement.setAttribute("lang", getLocale());
-			}
-		},
-		head: () => ({
-			meta: [
-				{
-					charSet: "utf-8",
-				},
-				{
-					name: "viewport",
-					content: "width=device-width, initial-scale=1",
-				},
-				{
-					title: "Tdf-mis",
-				},
-			],
-			links: [
-				{
-					rel: "stylesheet",
-					href: appCss,
-				},
-			],
-		}),
-		errorComponent: () => <div>/ error</div>,
-		component: RootComponent,
-		notFoundComponent: () => <div>/ not found</div>,
+export const Route = createRootRouteWithContext<{
+	queryClient: QueryClient;
+}>()({
+	beforeLoad: async () => {
+		if (typeof document !== "undefined") {
+			document.documentElement.setAttribute("lang", getLocale());
+		}
 	},
-);
+	head: () => ({
+		meta: [
+			{
+				charSet: "utf-8",
+			},
+			{
+				name: "viewport",
+				content: "width=device-width, initial-scale=1",
+			},
+			{
+				title: "Tdf-mis",
+			},
+		],
+		links: [
+			{
+				rel: "stylesheet",
+				href: appCss,
+			},
+		],
+	}),
+	errorComponent: () => <div>/ error</div>,
+	component: RootComponent,
+	notFoundComponent: () => <div>/ not found</div>,
+});
 function RootComponent() {
 	return (
 		<RootDocument>
@@ -56,7 +58,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				{children}
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="light"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<AuthProvider>{children}</AuthProvider>
+				</ThemeProvider>
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",
