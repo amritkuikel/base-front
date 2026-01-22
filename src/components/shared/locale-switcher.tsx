@@ -13,12 +13,12 @@ export default function ParaglideLocaleSwitcher() {
 				color: "inherit",
 			}}
 		>
-            <div>{m.example_message({username: "John"})}</div>
-            <div>{m.current_locale({locale: currentLocale})}</div>
+			<div>{m.example_message({ username: "John" })}</div>
+			<div>{m.current_locale({ locale: currentLocale })}</div>
 			<div style={{ display: "flex", gap: "0.25rem" }}>
 				{locales.map((locale) => (
 					<Button
-                        type="button"
+						type="button"
 						key={locale}
 						onClick={() => setLocale(locale)}
 						aria-pressed={locale === currentLocale}
