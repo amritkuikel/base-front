@@ -1,1 +1,1 @@
-base starter for react + tanstack start + tailwind + biome + shadcn ui + paraglide + t3-env
+base starter for react + tanstack start + tailwind + biome + shadcn ui + paraglide + t3-env + husky + axios
