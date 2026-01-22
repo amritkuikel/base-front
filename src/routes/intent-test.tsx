@@ -3,8 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import ParaglideLocaleSwitcher from "@/components/shared/locale-switcher";
 import { Button } from "@/components/ui/button";
 import { env } from "@/env";
-import { m } from "@/paraglide/messages";
 import { postsQueryOptions } from "@/lib/utils";
+import { m } from "@/paraglide/messages";
 import { getLocale } from "@/paraglide/runtime";
 
 export const Route = createFileRoute("/intent-test")({
@@ -16,11 +16,11 @@ export const Route = createFileRoute("/intent-test")({
 
 function RouteComponent() {
 	const { data: posts } = useSuspenseQuery(postsQueryOptions());
-	const currentLocale = getLocale()
+	const currentLocale = getLocale();
 	return (
 		<div className="flex flex-col gap-2">
 			<div>{m.example_message({ username: "John" })}</div>
-						<div>{m.current_locale({ locale: currentLocale })}</div>
+			<div>{m.current_locale({ locale: currentLocale })}</div>
 			<ParaglideLocaleSwitcher />
 			<div className="flex flex-col gap-2">
 				<span>{env.VITE_APP_ENV}</span>

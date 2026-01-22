@@ -12,7 +12,6 @@ export default function ParaglideLocaleSwitcher() {
 				color: "inherit",
 			}}
 		>
-			
 			<div style={{ display: "flex", gap: "0.25rem" }}>
 				{locales.map((locale) => (
 					<Button
