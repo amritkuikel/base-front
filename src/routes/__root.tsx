@@ -7,10 +7,16 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { getLocale } from "@/paraglide/runtime";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 	{
+		beforeLoad: async () => {
+			if (typeof document !== "undefined") {
+				document.documentElement.setAttribute("lang", getLocale());
+			}
+		},
 		head: () => ({
 			meta: [
 				{

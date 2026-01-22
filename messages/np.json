@@ -1,0 +1,5 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "example_message": "नमस्ते {username}",
+  "current_locale": "हालको भाषा: {locale}"
+}
