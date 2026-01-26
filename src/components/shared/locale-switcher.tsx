@@ -1,8 +1,10 @@
+import { m } from "@/paraglide/messages";
 import { getLocale, locales, setLocale } from "@/paraglide/runtime";
 import { Button } from "../ui/button";
 
 export default function ParaglideLocaleSwitcher() {
 	const currentLocale = getLocale();
+	console.log(locales);
 	return (
 		<div
 			style={{
@@ -21,7 +23,7 @@ export default function ParaglideLocaleSwitcher() {
 						aria-pressed={locale === currentLocale}
 						variant={locale === currentLocale ? "default" : "outline"}
 					>
-						{locale.toUpperCase()}
+						{locale === "en" ? m.english() : m.nepali()}
 					</Button>
 				))}
 			</div>

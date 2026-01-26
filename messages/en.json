@@ -1,5 +1,12 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Hello world {username}",
-  "current_locale": "Current locale: {locale}"
+  "dashboard": "Dashboard",
+  "logout": "Logout",
+  "english": "EN",
+  "nepali": "NP",
+  "totalProjects": "Total Projects",
+  "totalLast3Months": "Total projects in the last 3 months",
+  "last3Months": "Last 3 months",
+  "last30Days": "Last 30 days",
+  "last7days": "Last 7 days"
 }

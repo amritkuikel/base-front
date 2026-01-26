@@ -1,5 +1,9 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"example_message": "नमस्ते संसार {username}",
-	"current_locale": "हालको लोकेल: {locale}"
+	"current_locale": "हालको लोकेल: {locale}",
+	"dashboard": "ड्यासबोर्ड",
+	"logout": "लगआउट गर्नुहोस्",
+	"english": "EN (अङ्ग्रेजी)",
+	"nepali": "एनपी"
 }

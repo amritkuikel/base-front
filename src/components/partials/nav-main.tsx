@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: <to be fixed later> */
 import type { Icon } from "@tabler/icons-react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";

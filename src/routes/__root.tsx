@@ -9,7 +9,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { getLocale } from "@/paraglide/runtime";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { AuthProvider, type useAuth } from "@/providers/use-auth";
+import { AuthProvider } from "@/providers/use-auth";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{
