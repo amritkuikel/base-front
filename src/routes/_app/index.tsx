@@ -7,5 +7,10 @@ export const Route = createFileRoute("/_app/")({
 });
 
 function App() {
-	return <ClientOnly> <DashboardPage /> </ClientOnly>;
+	return (
+		<ClientOnly>
+			{" "}
+			<DashboardPage />{" "}
+		</ClientOnly>
+	);
 }
