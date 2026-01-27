@@ -1,95 +1,87 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { TextInput } from "@/components/forms/form-components/text-input";
 import { ModeToggle } from "@/components/shared/theme-switcher";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Form } from "@/components/ui/form";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import { FieldGroup } from "@/components/ui/field";
 import { loginFn } from "@/lib/auth";
+import { useAppForm } from "@/components/forms/form/test/form-hook";
+import { useServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 
 const LoginSchema = z.object({
 	email: z.string().email(),
-	password: z
-		.string()
-		.min(8, { message: "Password must be at least 8 characters" }),
+	password: z.string().min(8, {
+		message: "Password must be at least 8 characters",
+	}),
 });
-
-type LoginFormType = z.infer<typeof LoginSchema>;
 
 export function LoginPage() {
 	const login = useServerFn(loginFn);
-	const loginForm = useForm<LoginFormType>({
-		resolver: zodResolver(LoginSchema),
+
+	const loginForm = useAppForm({
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+		validators: {
+			onBlur: LoginSchema,
+			onSubmit: LoginSchema,
+		},
+		onSubmit: async ({ value }) => {
+			login({ data: value });
+		},
 	});
-	const onLoginSubmit = (data: LoginFormType) => {
-		login({ data });
-	};
 
 	return (
-		<div className="flex flex-col gap-2 h-screen items-center justify-center ">
-			<Card className="overflow-hidden p-0">
-				<CardContent className="grid p-0 md:grid-cols-2">
-					<Form {...loginForm}>
-						<form
-							className="p-6 md:p-8"
-							onSubmit={loginForm.handleSubmit(onLoginSubmit)}
-						>
-							<div className="flex flex-col gap-6">
-								<div className="flex flex-col items-center text-center">
-									<h1 className="text-2xl font-bold">Welcome back</h1>
-									<p className="text-muted-foreground text-balance">
-										Login to your TDF-Town Development Fund account
-									</p>
-								</div>
-								<TextInput
-									type="email"
-									name="email"
-									control={loginForm.control}
-									label="Email"
-									required
-									placeholder="Enter your email"
-								/>
-								<TextInput
-									name="password"
-									control={loginForm.control}
-									label="Password"
-									type="password"
-									placeholder="Enter your password"
-									required
-								/>
-								<Button type="submit" className="w-full">
-									Login
-								</Button>
+		<div className="relative flex min-h-screen items-center justify-center bg-muted/40 px-4">
+			<Card className="w-full max-w-sm shadow-lg">
+				<CardHeader className="space-y-1 text-center">
+					<CardTitle className="text-2xl">Welcome back</CardTitle>
+					<CardDescription>Sign in to your account to continue</CardDescription>
+				</CardHeader>
 
-								<div className="text-center text-sm">
-									Don&apos;t have an account?{" "}
-									<Link
-										to="/signup"
-										className="underline underline-offset-4 text-blue-500"
-									>
-										Sign up
-									</Link>
-								</div>
-							</div>
-						</form>
-					</Form>
-					<div className="bg-muted relative hidden md:block">
-						<img
-							src="/login.png"
-							alt="login page"
-							className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-						/>
-					</div>
+				<CardContent>
+					<form
+						id="login-form"
+						onSubmit={(e) => {
+							e.preventDefault();
+							loginForm.handleSubmit(e);
+						}}
+						className="space-y-4"
+					>
+						<FieldGroup>
+							<loginForm.AppField
+								name="email"
+								children={(field) => (
+									<field.TextInput label="Email" type="email" />
+								)}
+							/>
+
+							<loginForm.AppField
+								name="password"
+								children={(field) => (
+									<field.TextInput label="Password" type="password" />
+								)}
+							/>
+						</FieldGroup>
+
+						<loginForm.AppForm>
+							<loginForm.SubscribeButtons />
+						</loginForm.AppForm>
+					</form>
 				</CardContent>
+
+				<CardFooter className="text-center text-xs text-muted-foreground">
+					By continuing, you agree to our Terms of Service and Privacy Policy.
+				</CardFooter>
 			</Card>
-			<div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-				By clicking continue, you agree to our Terms of Service and Privacy
-				Policy.
-			</div>
-			<div className="absolute bottom-2 left-2">
+
+			<div className="absolute bottom-4 left-4">
 				<ModeToggle />
 			</div>
 		</div>
